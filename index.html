@@ -7,231 +7,220 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navegación flotante -->
-    <nav class="floating-nav">
-        <div class="nav-dots">
-            <span class="nav-dot active" data-section="hero"></span>
-            <span class="nav-dot" data-section="uriel"></span>
-            <span class="nav-dot" data-section="vitoria"></span>
-            <span class="nav-dot" data-section="balloon"></span>
+    <!-- Cursor personalizado -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-glow"></div>
+
+    <!-- Fondo con efecto parallax 3D -->
+    <div class="background-3d">
+        <div class="bg-sphere sphere-1"></div>
+        <div class="bg-sphere sphere-2"></div>
+        <div class="bg-sphere sphere-3"></div>
+        <div class="light-source"></div>
+    </div>
+
+    <!-- Navegación superior -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-text">Feliz Día Papá</span>
+            </div>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link active">Inicio</a>
+                <a href="#uriel" class="nav-link">Uriel</a>
+                <a href="#vitoria" class="nav-link">Vitoria</a>
+                <a href="#surprise" class="nav-link">Sorpresa</a>
+            </div>
         </div>
     </nav>
 
-    <!-- Sección Hero Mejorada -->
+    <!-- Hero Section con efecto 3D -->
     <section class="hero" id="hero">
-        <div class="hero-background">
-            <div class="animated-bg"></div>
-            <div class="gradient-overlay"></div>
-        </div>
-
         <div class="hero-content">
-            <div class="hero-badge">
-                <img src="/manus-storage/fathers-day-badge_383cd974.png" alt="Badge" class="badge-img">
+            <div class="hero-text-container">
+                <h1 class="hero-title">
+                    <span class="title-letter" style="--index: 0">F</span>
+                    <span class="title-letter" style="--index: 1">e</span>
+                    <span class="title-letter" style="--index: 2">l</span>
+                    <span class="title-letter" style="--index: 3">i</span>
+                    <span class="title-letter" style="--index: 4">z</span>
+                    <span class="title-letter" style="--index: 5"> </span>
+                    <span class="title-letter" style="--index: 6">D</span>
+                    <span class="title-letter" style="--index: 7">í</span>
+                    <span class="title-letter" style="--index: 8">a</span>
+                </h1>
+                <h2 class="hero-subtitle">
+                    <span class="subtitle-word">al</span>
+                    <span class="subtitle-word">Mejor</span>
+                    <span class="subtitle-word">Padre</span>
+                </h2>
+                <p class="hero-description">Dedicatorias llenas de amor, gratitud y momentos especiales</p>
             </div>
-            
-            <h1 class="hero-title">
-                <span class="title-word">Feliz</span>
-                <span class="title-word">Día</span>
-                <span class="title-word">al</span>
-                <span class="title-word">Mejor</span>
-                <span class="title-word">Padre</span>
-            </h1>
 
-            <div class="hero-image-container">
-                <div class="image-frame">
+            <div class="hero-image-wrapper">
+                <div class="image-container 3d-card">
                     <img src="papa.jpg" alt="Familia feliz" class="hero-image">
-                    <div class="image-glow"></div>
+                    <div class="image-overlay"></div>
+                    <div class="image-light"></div>
                 </div>
-            </div>
-
-            <p class="hero-subtitle">Dedicatorias llenas de amor y gratitud</p>
-
-            <div class="scroll-indicator">
-                <span>Desplázate para ver más</span>
-                <div class="scroll-arrow"></div>
             </div>
         </div>
 
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
+        <div class="scroll-indicator">
+            <span>Desplázate para descubrir</span>
+            <div class="scroll-line"></div>
         </div>
     </section>
 
-    <!-- Sección de Dedicatorias de Uriel -->
+    <!-- Sección Uriel -->
     <section class="dedicatorias-section uriel-section" id="uriel">
-        <div class="section-header">
-            <div class="header-decoration"></div>
-            <h2 class="section-title">
-                <span class="name-highlight">Uriel</span>
-            </h2>
-            <div class="header-decoration"></div>
-        </div>
-
-        <div class="dedicatorias-grid">
-            <div class="dedicatoria-card" style="--delay: 0.1s">
-                <div class="card-number">01</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">Para el mejor papá del mundo que siempre esta ahi sin importar que y que hace que todo se sienta mejor y simplemente bien.</p>
-                </div>
-                <div class="card-decoration"></div>
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Dedicatorias de <span class="highlight-name">Uriel</span></h2>
+                <div class="title-underline"></div>
             </div>
 
-            <div class="dedicatoria-card" style="--delay: 0.2s">
-                <div class="card-number">02</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">Gracias por ser mi guía mi apoyo y mi mejor ejemplo no hay palabras suficientes para agradecerte todo lo que haces por mí.</p>
+            <div class="cards-grid">
+                <div class="card-wrapper" style="--card-index: 0">
+                    <div class="card 3d-card">
+                        <div class="card-inner">
+                            <div class="card-number">01</div>
+                            <p class="card-text">Para el mejor papá del mundo que siempre esta ahi sin importar que y que hace que todo se sienta mejor y simplemente bien.</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
                 </div>
-                <div class="card-decoration"></div>
-            </div>
 
-            <div class="dedicatoria-card" style="--delay: 0.3s">
-                <div class="card-number">03</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">Papá, tu amor, tu paciencia y tus consejos y tu forma de buscar alguna manera enseñarnos algo valioso han moldeado la persona que soy hoy te admiro y te quiero con todo mi corazón mucho.</p>
+                <div class="card-wrapper" style="--card-index: 1">
+                    <div class="card 3d-card">
+                        <div class="card-inner">
+                            <div class="card-number">02</div>
+                            <p class="card-text">Gracias por ser mi guía mi apoyo y mi mejor ejemplo no hay palabras suficientes para agradecerte todo lo que haces por mí.</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
                 </div>
-                <div class="card-decoration"></div>
-            </div>
 
-            <div class="dedicatoria-card" style="--delay: 0.4s">
-                <div class="card-number">04</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">En el libro de mi vida, tú eres el capítulo más importante. Gracias por ser un padre excepcional.</p>
+                <div class="card-wrapper" style="--card-index: 2">
+                    <div class="card 3d-card">
+                        <div class="card-inner">
+                            <div class="card-number">03</div>
+                            <p class="card-text">Papá, tu amor, tu paciencia y tus consejos y tu forma de buscar alguna manera enseñarnos algo valioso han moldeado la persona que soy hoy te admiro y te quiero con todo mi corazón mucho.</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
                 </div>
-                <div class="card-decoration"></div>
-            </div>
 
-            <div class="dedicatoria-card" style="--delay: 0.5s">
-                <div class="card-number">05</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">Gracias por enseñarme a caminar por la vida con la cabeza en alto ¡te quiero mucho!</p>
+                <div class="card-wrapper" style="--card-index: 3">
+                    <div class="card 3d-card">
+                        <div class="card-inner">
+                            <div class="card-number">04</div>
+                            <p class="card-text">En el libro de mi vida, tú eres el capítulo más importante. Gracias por ser un padre excepcional.</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
                 </div>
-                <div class="card-decoration"></div>
+
+                <div class="card-wrapper" style="--card-index: 4">
+                    <div class="card 3d-card">
+                        <div class="card-inner">
+                            <div class="card-number">05</div>
+                            <p class="card-text">Gracias por enseñarme a caminar por la vida con la cabeza en alto ¡te quiero mucho!</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección de Dedicatorias de Vitoria -->
+    <!-- Sección Vitoria -->
     <section class="dedicatorias-section vitoria-section" id="vitoria">
-        <div class="section-header">
-            <div class="header-decoration"></div>
-            <h2 class="section-title">
-                <span class="name-highlight vitoria-highlight">Vitoria</span>
-            </h2>
-            <div class="header-decoration"></div>
-        </div>
-
-        <div class="dedicatorias-grid">
-            <div class="dedicatoria-card vitoria-card" style="--delay: 0.1s">
-                <div class="card-number">01</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">Gracias por todo lo que haces por nosotros cada día. Aunque a veces no lo diga, valoro mucho tu esfuerzo y todo el apoyo que nos das</p>
-                </div>
-                <div class="card-decoration"></div>
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Dedicatorias de <span class="highlight-name vitoria-name">Vitoria</span></h2>
+                <div class="title-underline"></div>
             </div>
 
-            <div class="dedicatoria-card vitoria-card" style="--delay: 0.2s">
-                <div class="card-number">02</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">Eres una persona muy admirable. Gracias por enseñarme con tu ejemplo a ser mejor persona</p>
+            <div class="cards-grid">
+                <div class="card-wrapper" style="--card-index: 0">
+                    <div class="card 3d-card vitoria-card">
+                        <div class="card-inner">
+                            <div class="card-number">01</div>
+                            <p class="card-text">Gracias por todo lo que haces por nosotros cada día. Aunque a veces no lo diga, valoro mucho tu esfuerzo y todo el apoyo que nos das</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
                 </div>
-                <div class="card-decoration"></div>
-            </div>
 
-            <div class="dedicatoria-card vitoria-card" style="--delay: 0.3s">
-                <div class="card-number">03</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">Me siento muy afortunada de tener un papá como tú. Gracias por tus consejos, tu paciencia y tu cariño</p>
+                <div class="card-wrapper" style="--card-index: 1">
+                    <div class="card 3d-card vitoria-card">
+                        <div class="card-inner">
+                            <div class="card-number">02</div>
+                            <p class="card-text">Eres una persona muy admirable. Gracias por enseñarme con tu ejemplo a ser mejor persona</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
                 </div>
-                <div class="card-decoration"></div>
-            </div>
 
-            <div class="dedicatoria-card vitoria-card" style="--delay: 0.4s">
-                <div class="card-number">04</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">En este Día del Padre quiero recordarte cuánto te quiero y lo importante que eres para mí. Gracias por estar siempre cuando te necesito</p>
+                <div class="card-wrapper" style="--card-index: 2">
+                    <div class="card 3d-card vitoria-card">
+                        <div class="card-inner">
+                            <div class="card-number">03</div>
+                            <p class="card-text">Me siento muy afortunada de tener un papá como tú. Gracias por tus consejos, tu paciencia y tu cariño</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
                 </div>
-                <div class="card-decoration"></div>
-            </div>
 
-            <div class="dedicatoria-card vitoria-card" style="--delay: 0.5s">
-                <div class="card-number">05</div>
-                <div class="card-content">
-                    <p class="dedicatoria-text">Gracias por ser tan divertido y por siempre hacerme reír. Contigo nunca faltan los buenos momentos</p>
+                <div class="card-wrapper" style="--card-index: 3">
+                    <div class="card 3d-card vitoria-card">
+                        <div class="card-inner">
+                            <div class="card-number">04</div>
+                            <p class="card-text">En este Día del Padre quiero recordarte cuánto te quiero y lo importante que eres para mí. Gracias por estar siempre cuando te necesito</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
                 </div>
-                <div class="card-decoration"></div>
+
+                <div class="card-wrapper" style="--card-index: 4">
+                    <div class="card 3d-card vitoria-card">
+                        <div class="card-inner">
+                            <div class="card-number">05</div>
+                            <p class="card-text">Gracias por ser tan divertido y por siempre hacerme reír. Contigo nunca faltan los buenos momentos</p>
+                        </div>
+                        <div class="card-shine"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección del Globo Mejorada -->
-    <section class="balloon-section" id="balloon">
-        <div class="balloon-background">
-            <div class="balloon-bg-animation"></div>
-        </div>
+    <!-- Sección Sorpresa -->
+    <section class="surprise-section" id="surprise">
+        <div class="section-container">
+            <h2 class="section-title">Una Sorpresa Especial</h2>
+            <div class="title-underline"></div>
 
-        <div class="balloon-content">
-            <h2 class="balloon-title">¡Una sorpresa especial!</h2>
-
-            <div class="balloon-container">
-                <!-- Personaje Izquierdo -->
-                <div class="character left-character">
-                    <div class="character-head">
-                        <div class="character-face">
-                            <div class="character-eye left-eye"></div>
-                            <div class="character-eye right-eye"></div>
-                            <div class="character-mouth"></div>
-                        </div>
-                    </div>
-                    <div class="character-body"></div>
-                    <div class="character-arm left-arm"></div>
-                    <div class="character-arm right-arm"></div>
-                    <div class="character-leg left-leg"></div>
-                    <div class="character-leg right-leg"></div>
-                </div>
-
-                <!-- Globo Principal -->
-                <div class="balloon-wrapper">
-                    <div class="balloon" id="balloon-main">
-                        <div class="balloon-shine"></div>
-                        <div class="balloon-body"></div>
-                        <div class="balloon-string"></div>
-                        <div class="balloon-message" id="balloon-msg">
-                            <p>¡Te queremos<br>mucho papá!</p>
-                            <div class="message-hearts">
-                                <span class="msg-heart">❤️</span>
-                                <span class="msg-heart">❤️</span>
-                                <span class="msg-heart">❤️</span>
-                            </div>
+            <div class="surprise-content">
+                <div class="balloon-scene">
+                    <div class="balloon-wrapper 3d-card" id="balloonWrapper">
+                        <div class="balloon" id="mainBalloon">
+                            <div class="balloon-surface"></div>
+                            <div class="balloon-shine"></div>
+                            <div class="balloon-string"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Personaje Derecho -->
-                <div class="character right-character">
-                    <div class="character-head">
-                        <div class="character-face">
-                            <div class="character-eye left-eye"></div>
-                            <div class="character-eye right-eye"></div>
-                            <div class="character-mouth"></div>
-                        </div>
-                    </div>
-                    <div class="character-body"></div>
-                    <div class="character-arm left-arm"></div>
-                    <div class="character-arm right-arm"></div>
-                    <div class="character-leg left-leg"></div>
-                    <div class="character-leg right-leg"></div>
+                <button class="pop-button" id="popButton">
+                    <span>Presiona el Globo</span>
+                    <span class="button-icon">🎈</span>
+                </button>
+
+                <div class="pop-message" id="popMessage">
+                    ¡Te queremos mucho papá con todo nuestros corazones! 💕
                 </div>
-            </div>
-
-            <button class="pop-button" id="popButton">
-                <span class="button-text">¡Presiona el globo!</span>
-                <span class="button-icon">🎈</span>
-            </button>
-
-            <div class="pop-message" id="popMessage">
-                <p>¡Te queremos mucho papá con todo nuestros corazones! 💕</p>
             </div>
         </div>
     </section>
@@ -239,12 +228,8 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p class="footer-text">Feliz Día del Padre 🎉</p>
-            <div class="footer-decoration">
-                <span>❤️</span>
-                <span>👨‍👧‍👦</span>
-                <span>❤️</span>
-            </div>
+            <p>Feliz Día del Padre 🎉</p>
+            <p class="footer-subtitle">Hecho con ❤️ para el mejor papá</p>
         </div>
     </footer>
 
