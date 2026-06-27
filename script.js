@@ -330,7 +330,7 @@ function playPopSound() {
     }
 }
 
-// ===== REVENTAR GLOBO =====
+// ===== REVENTAR GLOBO MEJORADO =====
 function popBalloon() {
     if (balloonPopped) return;
 
@@ -341,51 +341,62 @@ function popBalloon() {
     const popButton = document.getElementById('popButton');
     const popMessage = document.getElementById('popMessage');
     const balloonWrapper = document.getElementById('balloonWrapper');
+    const balloonSurface = document.querySelector('.balloon-surface');
 
     if (!mainBalloon || !popButton || !popMessage) {
         console.error('Elementos del globo no encontrados');
         return;
     }
 
-    // Animar desaparición del globo con más impacto
-    mainBalloon.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-    mainBalloon.style.transform = 'scale(0) rotate(360deg)';
-    mainBalloon.style.opacity = '0';
-    mainBalloon.style.filter = 'blur(10px)';
+    // Agregar clase de explosión al globo
+    if (balloonSurface) {
+        balloonSurface.classList.add('exploding');
+    }
 
-    // Efecto de sacudida en el wrapper
+    // Animar desaparición del globo con más impacto
+    mainBalloon.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    mainBalloon.style.transform = 'scale(0) rotate(720deg)';
+    mainBalloon.style.opacity = '0';
+    mainBalloon.style.filter = 'blur(15px)';
+
+    // Efecto de sacudida más dramática en el wrapper
     if (balloonWrapper) {
-        balloonWrapper.style.animation = 'balloonPop 0.3s ease-out';
+        balloonWrapper.style.animation = 'balloonPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
     }
 
     // Efectos en secuencia
     playPopSound();
+    
+    // Crear partículas de explosión inmediatamente
     createExplosionParticles();
     
-    // Confeti con delay para mejor efecto
+    // Confeti con delay para mejor efecto de cascada
     setTimeout(() => {
         createConfetti();
-    }, 50);
+    }, 100);
 
-    // Mostrar mensaje con delay mayor
+    // Mostrar mensaje con delay
     setTimeout(() => {
         popMessage.classList.add('show');
-    }, 400);
+    }, 300);
 
-    // Deshabilitar botón
-    popButton.disabled = true;
-    popButton.style.pointerEvents = 'none';
-    popButton.style.opacity = '0.5';
-    popButton.style.cursor = 'not-allowed';
-    
-    const buttonText = popButton.querySelector('.button-text');
-    if (buttonText) {
-        buttonText.textContent = '¡Globo Reventado!';
-    }
+    // Deshabilitar botón con transición suave
+    setTimeout(() => {
+        popButton.disabled = true;
+        popButton.style.pointerEvents = 'none';
+        popButton.style.opacity = '0.6';
+        popButton.style.cursor = 'not-allowed';
+        popButton.style.transition = 'all 0.4s ease';
+        
+        const buttonText = popButton.querySelector('.button-text');
+        if (buttonText) {
+            buttonText.textContent = '¡Globo Reventado!';
+        }
+    }, 200);
 
-    // Vibración más intensa
+    // Vibración más intensa y prolongada
     if (navigator.vibrate) {
-        navigator.vibrate([150, 75, 150, 75, 200, 75, 150, 50, 100]);
+        navigator.vibrate([200, 100, 150, 100, 200, 100, 150, 75, 150, 50, 100]);
     }
 }
 

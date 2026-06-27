@@ -933,6 +933,10 @@ body {
     transform: scale(1.1) rotateZ(2deg);
 }
 
+.balloon.exploding {
+    animation: balloonExplode 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
 .balloon-surface {
     width: 160px;
     height: 220px;
@@ -1026,33 +1030,108 @@ body {
 }
 
 @keyframes balloonPop {
-    0% { transform: scale(1) rotateZ(0deg); }
-    25% { transform: scale(1.05) rotateZ(-5deg); }
-    50% { transform: scale(0.98) rotateZ(5deg); }
-    75% { transform: scale(1.02) rotateZ(-3deg); }
-    100% { transform: scale(1) rotateZ(0deg); }
+    0% { 
+        transform: scale(1) rotateZ(0deg);
+        opacity: 1;
+    }
+    10% { 
+        transform: scale(1.15) rotateZ(-8deg);
+        opacity: 1;
+    }
+    30% { 
+        transform: scale(0.95) rotateZ(8deg);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.05) rotateZ(-5deg);
+        opacity: 0.8;
+    }
+    100% { 
+        transform: scale(0) rotateZ(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes balloonExplode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
 
 .pop-message {
     font-size: 1.8rem;
     font-weight: 800;
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+    letter-spacing: 1px;
+    line-height: 1.8;
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.message-line {
+    margin: var(--spacing-md) 0;
     background: linear-gradient(135deg, var(--accent-coral) 0%, var(--accent-warm) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    opacity: 0;
-    pointer-events: none;
-    display: none;
-    text-shadow: 0 4px 20px rgba(255, 107, 91, 0.2);
+    font-size: 1.6rem;
+    font-weight: 800;
     letter-spacing: 1px;
-    line-height: 1.4;
+    text-shadow: 0 4px 20px rgba(255, 107, 91, 0.2);
+    animation: messageLineIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+}
+
+.message-line:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.message-line:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.message-line:nth-child(3) {
+    animation-delay: 0.6s;
+    font-size: 2rem;
 }
 
 .pop-message.show {
     display: block;
     opacity: 1;
     pointer-events: auto;
-    animation: messagePopIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.pop-message.show .message-line {
+    opacity: 1;
+}
+
+@keyframes messageLineIn {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateY(50px) rotateX(90deg);
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) translateY(-5px) rotateX(0);
+        filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotateX(0);
+        filter: blur(0px);
+    }
 }
 
 @keyframes messagePopIn {
