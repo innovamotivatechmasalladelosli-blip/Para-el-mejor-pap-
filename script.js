@@ -82,8 +82,10 @@ function initNavigation() {
 
     // Toggle menú móvil
     if (navToggle) {
-        navToggle.addEventListener('click', () => {
+        navToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
             mobileMenuOpen = !mobileMenuOpen;
+            console.log('Menu toggled:', mobileMenuOpen);
             if (navLinksContainer) {
                 navLinksContainer.classList.toggle('active');
             }
@@ -93,7 +95,7 @@ function initNavigation() {
 
     // Cerrar menú al hacer clic en un enlace
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (e) => {
             mobileMenuOpen = false;
             if (navLinksContainer) {
                 navLinksContainer.classList.remove('active');
@@ -102,6 +104,15 @@ function initNavigation() {
                 navToggle.classList.remove('active');
             }
         });
+    });
+
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener('click', (e) => {
+        if (mobileMenuOpen && navLinksContainer && !navLinksContainer.contains(e.target) && !navToggle.contains(e.target)) {
+            mobileMenuOpen = false;
+            navLinksContainer.classList.remove('active');
+            navToggle.classList.remove('active');
+        }
     });
 
     // Actualizar enlace activo al hacer scroll
@@ -297,41 +308,37 @@ function popBalloon() {
     if (balloonPopped) return;
 
     balloonPopped = true;
+    console.log('🎈 Globo reventado!');
 
     const mainBalloon = document.getElementById('mainBalloon');
     const popButton = document.getElementById('popButton');
     const popMessage = document.getElementById('popMessage');
 
-    if (!mainBalloon || !popButton || !popMessage) return;
+    if (!mainBalloon || !popButton || !popMessage) {
+        console.error('Elementos del globo no encontrados');
+        return;
+    }
 
     // Animar desaparición del globo
-    mainBalloon.animate([
-        {
-            transform: 'scale(1) rotate(0deg)',
-            opacity: 1
-        },
-        {
-            transform: 'scale(0) rotate(180deg)',
-            opacity: 0
-        }
-    ], {
-        duration: 500,
-        easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
-        fill: 'forwards'
-    });
+    mainBalloon.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    mainBalloon.style.transform = 'scale(0) rotate(180deg)';
+    mainBalloon.style.opacity = '0';
 
     // Efectos
     playPopSound();
     createExplosionParticles();
     createConfetti();
 
-    // Mostrar mensaje
-    popMessage.classList.add('show');
+    // Mostrar mensaje con delay
+    setTimeout(() => {
+        popMessage.classList.add('show');
+    }, 300);
 
     // Deshabilitar botón
     popButton.disabled = true;
     popButton.style.pointerEvents = 'none';
     popButton.style.opacity = '0.5';
+    popButton.style.cursor = 'not-allowed';
     
     const buttonText = popButton.querySelector('.button-text');
     if (buttonText) {
@@ -384,6 +391,8 @@ function initParallax() {
 
 // ===== INICIALIZACIÓN =====
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('Inicializando página...');
+    
     // Inicializar todas las funciones
     initCustomCursor();
     init3DCards();
@@ -396,11 +405,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainBalloon = document.getElementById('mainBalloon');
 
     if (popButton) {
-        popButton.addEventListener('click', popBalloon);
+        console.log('Botón encontrado, agregando evento click');
+        popButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            popBalloon();
+        });
+    } else {
+        console.error('Botón del globo no encontrado');
     }
 
     if (mainBalloon) {
-        mainBalloon.addEventListener('click', popBalloon);
+        console.log('Globo encontrado, agregando evento click');
+        mainBalloon.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            popBalloon();
+        });
+    } else {
+        console.error('Globo no encontrado');
     }
 
     // Fade in inicial

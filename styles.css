@@ -96,7 +96,9 @@ body {
     .cursor-glow {
         display: block;
     }
-    cursor: none;
+    body {
+        cursor: none;
+    }
 }
 
 /* ===== FONDO MEJORADO ===== */
@@ -1028,12 +1030,15 @@ body {
     font-weight: 700;
     color: var(--accent-coral);
     opacity: 0;
-    transition: opacity 0.5s ease;
-    animation: messagePopIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    pointer-events: none;
+    display: none;
 }
 
 .pop-message.show {
+    display: block;
     opacity: 1;
+    pointer-events: auto;
+    animation: messagePopIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 @keyframes messagePopIn {
