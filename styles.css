@@ -1025,13 +1025,27 @@ body {
     50% { transform: translateY(-10px) rotateZ(8deg); }
 }
 
+@keyframes balloonPop {
+    0% { transform: scale(1) rotateZ(0deg); }
+    25% { transform: scale(1.05) rotateZ(-5deg); }
+    50% { transform: scale(0.98) rotateZ(5deg); }
+    75% { transform: scale(1.02) rotateZ(-3deg); }
+    100% { transform: scale(1) rotateZ(0deg); }
+}
+
 .pop-message {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--accent-coral);
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-coral) 0%, var(--accent-warm) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     opacity: 0;
     pointer-events: none;
     display: none;
+    text-shadow: 0 4px 20px rgba(255, 107, 91, 0.2);
+    letter-spacing: 1px;
+    line-height: 1.4;
 }
 
 .pop-message.show {
@@ -1044,11 +1058,18 @@ body {
 @keyframes messagePopIn {
     0% {
         opacity: 0;
-        transform: scale(0.2) translateY(50px) rotateX(90deg);
+        transform: scale(0) translateY(80px) rotateX(90deg) rotateY(45deg);
+        filter: blur(20px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) translateY(-10px) rotateX(0) rotateY(0);
+        filter: blur(0px);
     }
     100% {
         opacity: 1;
-        transform: scale(1) translateY(0) rotateX(0);
+        transform: scale(1) translateY(0) rotateX(0) rotateY(0);
+        filter: blur(0px);
     }
 }
 

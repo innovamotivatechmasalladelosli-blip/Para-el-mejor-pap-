@@ -152,20 +152,25 @@ function initNavigation() {
 
 // ===== CREAR CONFETI MEJORADO =====
 function createConfetti() {
-    const confettiCount = 150;
-    const colors = ['#ff6b5b', '#ff8a7b', '#ffb3a7', '#f4a261', '#e76f51', '#2a9d8f'];
+    const confettiCount = 250;  // Aumentado para más impacto
+    const colors = ['#ff6b5b', '#ff8a7b', '#ffb3a7', '#f4a261', '#e76f51', '#2a9d8f', '#264653', '#ff1744'];
+    const balloonWrapper = document.getElementById('balloonWrapper');
+    const rect = balloonWrapper ? balloonWrapper.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2 };
+    const startX = rect.left + (rect.width || 0) / 2;
+    const startY = rect.top + (rect.height || 0) / 2;
 
     for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
 
-        const size = Math.random() * 14 + 6;
-        const startX = Math.random() * window.innerWidth;
-        const startY = window.innerHeight / 2;
-        const duration = Math.random() * 4 + 2.5;
-        const xMove = (Math.random() - 0.5) * 600;
-        const rotation = Math.random() * 720;
-        const delay = Math.random() * 0.4;
+        const size = Math.random() * 16 + 4;
+        const duration = Math.random() * 3.5 + 2.5;
+        const angle = (Math.PI * 2 * i) / confettiCount + (Math.random() - 0.5) * 0.5;
+        const velocity = 8 + Math.random() * 15;
+        const xMove = Math.cos(angle) * velocity * 80;
+        const yMove = Math.sin(angle) * velocity * 80 + window.innerHeight * 0.3;
+        const rotation = Math.random() * 1080;
+        const delay = Math.random() * 0.2;
 
         confetti.style.left = startX + 'px';
         confetti.style.top = startY + 'px';
@@ -173,8 +178,9 @@ function createConfetti() {
         confetti.style.height = size + 'px';
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        confetti.style.opacity = Math.random() * 0.8 + 0.4;
-        confetti.style.boxShadow = `0 0 ${Math.random() * 12 + 6}px currentColor`;
+        confetti.style.opacity = Math.random() * 0.9 + 0.5;
+        confetti.style.boxShadow = `0 0 ${Math.random() * 15 + 8}px currentColor`;
+        confetti.style.filter = `brightness(${Math.random() * 0.3 + 0.8})`;
 
         document.body.appendChild(confetti);
 
@@ -184,7 +190,7 @@ function createConfetti() {
                 opacity: 1
             },
             {
-                transform: `translate(${xMove}px, ${window.innerHeight + 100}px) rotate(${rotation}deg) scale(0.3)`,
+                transform: `translate(${xMove}px, ${yMove}px) rotate(${rotation}deg) scale(0.1)`,
                 opacity: 0
             }
         ];
@@ -211,8 +217,8 @@ function createExplosionParticles() {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    const particleCount = 60;
-    const colors = ['#ff6b5b', '#ff8a7b', '#ffb3a7', '#f4a261', '#e76f51'];
+    const particleCount = 120;  // Aumentado para más impacto
+    const colors = ['#ff6b5b', '#ff8a7b', '#ffb3a7', '#f4a261', '#e76f51', '#ff1744', '#ffd600', '#00e676'];
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -220,34 +226,38 @@ function createExplosionParticles() {
         particle.style.pointerEvents = 'none';
         particle.style.left = centerX + 'px';
         particle.style.top = centerY + 'px';
-        particle.style.width = '16px';
-        particle.style.height = '16px';
+        const size = Math.random() * 20 + 10;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
         particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.borderRadius = '50%';
+        particle.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
         particle.style.zIndex = '999';
-        particle.style.boxShadow = `0 0 30px currentColor`;
+        particle.style.boxShadow = `0 0 ${Math.random() * 20 + 15}px currentColor`;
+        particle.style.filter = `brightness(${Math.random() * 0.4 + 0.7})`;
 
         document.body.appendChild(particle);
 
-        const angle = (Math.PI * 2 * i) / particleCount;
-        const velocity = 14 + Math.random() * 12;
+        const angle = (Math.PI * 2 * i) / particleCount + (Math.random() - 0.5) * 0.3;
+        const velocity = 18 + Math.random() * 16;  // Más velocidad
         const vx = Math.cos(angle) * velocity;
         const vy = Math.sin(angle) * velocity;
 
         let x = centerX;
         let y = centerY;
         let life = 1;
+        let rotation = Math.random() * 360;
 
         const animate = () => {
             x += vx;
             y += vy;
-            vy += 0.5; // Gravedad
-            life -= 0.016;
+            vy += 0.4; // Gravedad
+            life -= 0.014;
+            rotation += Math.random() * 20;
 
             particle.style.left = x + 'px';
             particle.style.top = y + 'px';
             particle.style.opacity = life;
-            particle.style.transform = `scale(${life * 0.9})`;
+            particle.style.transform = `scale(${life * 0.95}) rotate(${rotation}deg)`;
 
             if (life > 0) {
                 requestAnimationFrame(animate);
@@ -260,12 +270,12 @@ function createExplosionParticles() {
     }
 }
 
-// ===== SONIDO DE EXPLOSIÓN =====
+// ===== SONIDO DE EXPLOSIÓN MEJORADO =====
 function playPopSound() {
     try {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-        // Sonido principal
+        // Sonido principal más fuerte
         const osc1 = audioContext.createOscillator();
         const gain1 = audioContext.createGain();
 
@@ -273,16 +283,16 @@ function playPopSound() {
         gain1.connect(audioContext.destination);
 
         osc1.type = 'sine';
-        osc1.frequency.setValueAtTime(280, audioContext.currentTime);
-        osc1.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.25);
+        osc1.frequency.setValueAtTime(320, audioContext.currentTime);
+        osc1.frequency.exponentialRampToValueAtTime(40, audioContext.currentTime + 0.3);
 
-        gain1.gain.setValueAtTime(0.4, audioContext.currentTime);
-        gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25);
+        gain1.gain.setValueAtTime(0.5, audioContext.currentTime);
+        gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
 
         osc1.start(audioContext.currentTime);
-        osc1.stop(audioContext.currentTime + 0.25);
+        osc1.stop(audioContext.currentTime + 0.3);
 
-        // Sonido secundario
+        // Sonido secundario más agudo
         const osc2 = audioContext.createOscillator();
         const gain2 = audioContext.createGain();
 
@@ -290,14 +300,31 @@ function playPopSound() {
         gain2.connect(audioContext.destination);
 
         osc2.type = 'triangle';
-        osc2.frequency.setValueAtTime(550, audioContext.currentTime);
-        osc2.frequency.exponentialRampToValueAtTime(150, audioContext.currentTime + 0.2);
+        osc2.frequency.setValueAtTime(650, audioContext.currentTime);
+        osc2.frequency.exponentialRampToValueAtTime(120, audioContext.currentTime + 0.25);
 
-        gain2.gain.setValueAtTime(0.3, audioContext.currentTime);
-        gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+        gain2.gain.setValueAtTime(0.4, audioContext.currentTime);
+        gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25);
 
         osc2.start(audioContext.currentTime);
-        osc2.stop(audioContext.currentTime + 0.2);
+        osc2.stop(audioContext.currentTime + 0.25);
+
+        // Tercer sonido para más complejidad
+        const osc3 = audioContext.createOscillator();
+        const gain3 = audioContext.createGain();
+
+        osc3.connect(gain3);
+        gain3.connect(audioContext.destination);
+
+        osc3.type = 'square';
+        osc3.frequency.setValueAtTime(200, audioContext.currentTime);
+        osc3.frequency.exponentialRampToValueAtTime(60, audioContext.currentTime + 0.2);
+
+        gain3.gain.setValueAtTime(0.2, audioContext.currentTime);
+        gain3.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+
+        osc3.start(audioContext.currentTime);
+        osc3.stop(audioContext.currentTime + 0.2);
     } catch (e) {
         console.log('Audio no disponible');
     }
@@ -313,26 +340,37 @@ function popBalloon() {
     const mainBalloon = document.getElementById('mainBalloon');
     const popButton = document.getElementById('popButton');
     const popMessage = document.getElementById('popMessage');
+    const balloonWrapper = document.getElementById('balloonWrapper');
 
     if (!mainBalloon || !popButton || !popMessage) {
         console.error('Elementos del globo no encontrados');
         return;
     }
 
-    // Animar desaparición del globo
-    mainBalloon.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-    mainBalloon.style.transform = 'scale(0) rotate(180deg)';
+    // Animar desaparición del globo con más impacto
+    mainBalloon.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    mainBalloon.style.transform = 'scale(0) rotate(360deg)';
     mainBalloon.style.opacity = '0';
+    mainBalloon.style.filter = 'blur(10px)';
 
-    // Efectos
+    // Efecto de sacudida en el wrapper
+    if (balloonWrapper) {
+        balloonWrapper.style.animation = 'balloonPop 0.3s ease-out';
+    }
+
+    // Efectos en secuencia
     playPopSound();
     createExplosionParticles();
-    createConfetti();
+    
+    // Confeti con delay para mejor efecto
+    setTimeout(() => {
+        createConfetti();
+    }, 50);
 
-    // Mostrar mensaje con delay
+    // Mostrar mensaje con delay mayor
     setTimeout(() => {
         popMessage.classList.add('show');
-    }, 300);
+    }, 400);
 
     // Deshabilitar botón
     popButton.disabled = true;
@@ -345,9 +383,9 @@ function popBalloon() {
         buttonText.textContent = '¡Globo Reventado!';
     }
 
-    // Vibración
+    // Vibración más intensa
     if (navigator.vibrate) {
-        navigator.vibrate([100, 50, 100, 50, 150, 50, 100]);
+        navigator.vibrate([150, 75, 150, 75, 200, 75, 150, 50, 100]);
     }
 }
 
