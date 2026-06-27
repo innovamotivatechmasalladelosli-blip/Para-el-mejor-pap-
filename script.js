@@ -11,12 +11,19 @@ function initCustomCursor() {
 
     if (!cursor || !cursorGlow) return;
 
+    let mouseXSmooth = 0;
+    let mouseYSmooth = 0;
+
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
 
-        cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
+        // Suavizado del cursor
+        mouseXSmooth += (mouseX - mouseXSmooth) * 0.3;
+        mouseYSmooth += (mouseY - mouseYSmooth) * 0.3;
+
+        cursor.style.left = mouseXSmooth + 'px';
+        cursor.style.top = mouseYSmooth + 'px';
 
         cursorGlow.style.left = mouseX + 'px';
         cursorGlow.style.top = mouseY + 'px';
@@ -29,10 +36,10 @@ function initCustomCursor() {
         }
     });
 
-    // Efecto de clic mejorado
+    // Efecto de clic
     document.addEventListener('mousedown', () => {
-        cursor.style.transform = 'translate(-50%, -50%) scale(0.6)';
-        cursorGlow.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        cursor.style.transform = 'translate(-50%, -50%) scale(0.5)';
+        cursorGlow.style.transform = 'translate(-50%, -50%) scale(0.7)';
     });
 
     document.addEventListener('mouseup', () => {
@@ -41,7 +48,7 @@ function initCustomCursor() {
     });
 }
 
-// ===== EFECTO 3D EN CARDS MEJORADO =====
+// ===== EFECTO 3D EN CARDS =====
 function init3DCards() {
     const cards = document.querySelectorAll('.3d-card');
 
@@ -54,10 +61,10 @@ function init3DCards() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = (y - centerY) / 15;
-            const rotateY = (centerX - x) / 15;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
 
-            card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+            card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
         });
 
         card.addEventListener('mouseleave', () => {
@@ -66,7 +73,7 @@ function init3DCards() {
     });
 }
 
-// ===== NAVEGACIÓN ACTIVA MEJORADA =====
+// ===== NAVEGACIÓN ACTIVA =====
 function initNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section');
@@ -134,20 +141,20 @@ function initNavigation() {
 
 // ===== CREAR CONFETI MEJORADO =====
 function createConfetti() {
-    const confettiCount = 120;
-    const colors = ['#d4af37', '#e94560', '#ff6b9d', '#0f3460', '#16213e', '#ffffff'];
+    const confettiCount = 150;
+    const colors = ['#ff6b5b', '#ff8a7b', '#ffb3a7', '#f4a261', '#e76f51', '#2a9d8f'];
 
     for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.classList.add('confetti');
 
-        const size = Math.random() * 12 + 5;
+        const size = Math.random() * 14 + 6;
         const startX = Math.random() * window.innerWidth;
         const startY = window.innerHeight / 2;
-        const duration = Math.random() * 3.5 + 2.5;
-        const xMove = (Math.random() - 0.5) * 500;
+        const duration = Math.random() * 4 + 2.5;
+        const xMove = (Math.random() - 0.5) * 600;
         const rotation = Math.random() * 720;
-        const delay = Math.random() * 0.3;
+        const delay = Math.random() * 0.4;
 
         confetti.style.left = startX + 'px';
         confetti.style.top = startY + 'px';
@@ -155,18 +162,18 @@ function createConfetti() {
         confetti.style.height = size + 'px';
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        confetti.style.opacity = Math.random() * 0.9 + 0.3;
-        confetti.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px currentColor`;
+        confetti.style.opacity = Math.random() * 0.8 + 0.4;
+        confetti.style.boxShadow = `0 0 ${Math.random() * 12 + 6}px currentColor`;
 
         document.body.appendChild(confetti);
 
         const keyframes = [
             {
-                transform: `translate(0, 0) rotate(0deg)`,
+                transform: `translate(0, 0) rotate(0deg) scale(1)`,
                 opacity: 1
             },
             {
-                transform: `translate(${xMove}px, ${window.innerHeight + 100}px) rotate(${rotation}deg)`,
+                transform: `translate(${xMove}px, ${window.innerHeight + 100}px) rotate(${rotation}deg) scale(0.3)`,
                 opacity: 0
             }
         ];
@@ -184,7 +191,7 @@ function createConfetti() {
     }
 }
 
-// ===== CREAR PARTÍCULAS DE EXPLOSIÓN MEJORADAS =====
+// ===== CREAR PARTÍCULAS DE EXPLOSIÓN =====
 function createExplosionParticles() {
     const balloonWrapper = document.getElementById('balloonWrapper');
     if (!balloonWrapper) return;
@@ -193,7 +200,8 @@ function createExplosionParticles() {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    const particleCount = 50;
+    const particleCount = 60;
+    const colors = ['#ff6b5b', '#ff8a7b', '#ffb3a7', '#f4a261', '#e76f51'];
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
@@ -201,17 +209,17 @@ function createExplosionParticles() {
         particle.style.pointerEvents = 'none';
         particle.style.left = centerX + 'px';
         particle.style.top = centerY + 'px';
-        particle.style.width = '14px';
-        particle.style.height = '14px';
-        particle.style.background = `hsl(${Math.random() * 60 + 340}, 100%, ${Math.random() * 30 + 50}%)`;
+        particle.style.width = '16px';
+        particle.style.height = '16px';
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
         particle.style.borderRadius = '50%';
         particle.style.zIndex = '999';
-        particle.style.boxShadow = `0 0 25px currentColor`;
+        particle.style.boxShadow = `0 0 30px currentColor`;
 
         document.body.appendChild(particle);
 
         const angle = (Math.PI * 2 * i) / particleCount;
-        const velocity = 12 + Math.random() * 10;
+        const velocity = 14 + Math.random() * 12;
         const vx = Math.cos(angle) * velocity;
         const vy = Math.sin(angle) * velocity;
 
@@ -222,13 +230,13 @@ function createExplosionParticles() {
         const animate = () => {
             x += vx;
             y += vy;
-            vy += 0.4; // Gravedad
-            life -= 0.018;
+            vy += 0.5; // Gravedad
+            life -= 0.016;
 
             particle.style.left = x + 'px';
             particle.style.top = y + 'px';
             particle.style.opacity = life;
-            particle.style.transform = `scale(${life * 0.8})`;
+            particle.style.transform = `scale(${life * 0.9})`;
 
             if (life > 0) {
                 requestAnimationFrame(animate);
@@ -241,12 +249,12 @@ function createExplosionParticles() {
     }
 }
 
-// ===== SONIDO DE EXPLOSIÓN MEJORADO =====
+// ===== SONIDO DE EXPLOSIÓN =====
 function playPopSound() {
     try {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
-        // Sonido principal - más profundo
+        // Sonido principal
         const osc1 = audioContext.createOscillator();
         const gain1 = audioContext.createGain();
 
@@ -254,16 +262,16 @@ function playPopSound() {
         gain1.connect(audioContext.destination);
 
         osc1.type = 'sine';
-        osc1.frequency.setValueAtTime(300, audioContext.currentTime);
-        osc1.frequency.exponentialRampToValueAtTime(40, audioContext.currentTime + 0.2);
+        osc1.frequency.setValueAtTime(280, audioContext.currentTime);
+        osc1.frequency.exponentialRampToValueAtTime(50, audioContext.currentTime + 0.25);
 
-        gain1.gain.setValueAtTime(0.35, audioContext.currentTime);
-        gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+        gain1.gain.setValueAtTime(0.4, audioContext.currentTime);
+        gain1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.25);
 
         osc1.start(audioContext.currentTime);
-        osc1.stop(audioContext.currentTime + 0.2);
+        osc1.stop(audioContext.currentTime + 0.25);
 
-        // Sonido secundario - más agudo
+        // Sonido secundario
         const osc2 = audioContext.createOscillator();
         const gain2 = audioContext.createGain();
 
@@ -271,40 +279,20 @@ function playPopSound() {
         gain2.connect(audioContext.destination);
 
         osc2.type = 'triangle';
-        osc2.frequency.setValueAtTime(500, audioContext.currentTime);
-        osc2.frequency.exponentialRampToValueAtTime(150, audioContext.currentTime + 0.15);
+        osc2.frequency.setValueAtTime(550, audioContext.currentTime);
+        osc2.frequency.exponentialRampToValueAtTime(150, audioContext.currentTime + 0.2);
 
-        gain2.gain.setValueAtTime(0.25, audioContext.currentTime);
-        gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+        gain2.gain.setValueAtTime(0.3, audioContext.currentTime);
+        gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
 
         osc2.start(audioContext.currentTime);
-        osc2.stop(audioContext.currentTime + 0.15);
-
-        // Sonido de ruido blanco
-        const bufferSize = audioContext.sampleRate * 0.1;
-        const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-            output[i] = Math.random() * 2 - 1;
-        }
-        
-        const noiseSource = audioContext.createBufferSource();
-        const noiseGain = audioContext.createGain();
-        
-        noiseSource.buffer = noiseBuffer;
-        noiseSource.connect(noiseGain);
-        noiseGain.connect(audioContext.destination);
-        
-        noiseGain.gain.setValueAtTime(0.15, audioContext.currentTime);
-        noiseGain.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
-        
-        noiseSource.start(audioContext.currentTime);
+        osc2.stop(audioContext.currentTime + 0.2);
     } catch (e) {
         console.log('Audio no disponible');
     }
 }
 
-// ===== REVENTAR GLOBO MEJORADO =====
+// ===== REVENTAR GLOBO =====
 function popBalloon() {
     if (balloonPopped) return;
 
@@ -323,11 +311,11 @@ function popBalloon() {
             opacity: 1
         },
         {
-            transform: 'scale(0.1) rotate(180deg)',
+            transform: 'scale(0) rotate(180deg)',
             opacity: 0
         }
     ], {
-        duration: 400,
+        duration: 500,
         easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
         fill: 'forwards'
     });
@@ -337,26 +325,26 @@ function popBalloon() {
     createExplosionParticles();
     createConfetti();
 
-    // Mostrar mensaje con animación
+    // Mostrar mensaje
     popMessage.classList.add('show');
 
     // Deshabilitar botón
     popButton.disabled = true;
     popButton.style.pointerEvents = 'none';
-    popButton.style.opacity = '0.6';
+    popButton.style.opacity = '0.5';
     
     const buttonText = popButton.querySelector('.button-text');
     if (buttonText) {
         buttonText.textContent = '¡Globo Reventado!';
     }
 
-    // Vibración mejorada
+    // Vibración
     if (navigator.vibrate) {
         navigator.vibrate([100, 50, 100, 50, 150, 50, 100]);
     }
 }
 
-// ===== SCROLL ANIMATIONS MEJORADAS =====
+// ===== SCROLL ANIMATIONS =====
 function initScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
@@ -385,7 +373,7 @@ function initParallax() {
         const scrollY = window.scrollY;
 
         parallaxElements.forEach((element, index) => {
-            const speed = 0.5 + (index * 0.1);
+            const speed = 0.4 + (index * 0.1);
             element.style.transform = `translateY(${scrollY * speed}px)`;
         });
     });
@@ -412,52 +400,21 @@ document.addEventListener('DOMContentLoaded', () => {
         mainBalloon.addEventListener('click', popBalloon);
     }
 
-    // Fade in inicial mejorado
+    // Fade in inicial
     document.body.style.opacity = '0';
     document.body.animate([
         { opacity: 0 },
         { opacity: 1 }
     ], {
-        duration: 1000,
+        duration: 1200,
         fill: 'forwards',
         easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
     });
 
-    // Agregar listeners para interactividad
-    document.addEventListener('click', (e) => {
-        // Efecto de ripple en clics
-        if (e.target.closest('.cta-button') || e.target.closest('.pop-button')) {
-            const ripple = document.createElement('span');
-            ripple.style.position = 'absolute';
-            ripple.style.borderRadius = '50%';
-            ripple.style.background = 'rgba(255, 255, 255, 0.5)';
-            ripple.style.pointerEvents = 'none';
-            ripple.style.animation = 'ripple 0.6s ease-out';
-        }
-    });
-
-    console.log('✨ Página rediseñada y optimizada correctamente ✨');
+    console.log('✨ Página rediseñada y lista ✨');
 });
 
 // ===== MANEJO DE ERRORES =====
 window.addEventListener('error', (e) => {
     console.error('Error:', e.error);
 });
-
-// ===== ANIMACIÓN DE RIPPLE =====
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes ripple {
-        from {
-            width: 0;
-            height: 0;
-            opacity: 1;
-        }
-        to {
-            width: 300px;
-            height: 300px;
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(style);
