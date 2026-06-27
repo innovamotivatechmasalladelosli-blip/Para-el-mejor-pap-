@@ -361,6 +361,9 @@ function initScrollAnimations() {
     }, observerOptions);
 
     document.querySelectorAll('.card-wrapper').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'all 0.6s ease-out';
         observer.observe(card);
     });
 }
@@ -401,15 +404,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Fade in inicial
-    document.body.style.opacity = '0';
-    document.body.animate([
-        { opacity: 0 },
-        { opacity: 1 }
-    ], {
-        duration: 1200,
-        fill: 'forwards',
-        easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
-    });
+    document.body.style.opacity = '1';
+    document.body.classList.add('loaded');
+    
+    // Asegurar que los elementos iniciales sean visibles si la animación falla
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) heroTitle.style.opacity = '1';
 
     console.log('✨ Página rediseñada y lista ✨');
 });
